@@ -1,0 +1,62 @@
+{
+    "blockchain": {
+      "type": "fabric",
+      "config": "benchmark/exp/network-k5o2p2.json"
+    },
+    "command" : {
+      "start": "docker-compose -f network/fabric/mynetwork-2-2/docker-compose.yaml up -d",
+      "end" : "docker-compose -f network/fabric/mynetwork-2-2/docker-compose.yaml down;docker rm $(docker ps -aq);docker rmi $(docker images dev* -q)"
+    },
+    "test": {
+      "name": "exp",
+      "description" : "This is an example benchmark for caliper, to test the backend DLT's performance with simple account opening & querying transactions",
+      "clients": {
+        "type": "local",
+        "number": 5
+      },
+      "rounds": [{
+          "label" : "open",
+          "txDuration" : [10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+                        10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+          "rateControl" : [
+              {"type": "poisson-rate", "opts": {"expectedRate" : 50}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 100}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 150}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 200}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 250}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 300}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 350}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 400}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 450}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 500}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 550}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 600}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 650}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 700}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 750}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 800}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 850}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 900}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 950}},
+              {"type": "poisson-rate", "opts": {"expectedRate" : 1000}}
+            ],
+          "arguments": { "money": 10000 },
+          "callback" : "benchmark/exp/open_5.js"
+        }]
+    },
+    "monitor": {
+      "type": ["docker", "process"],
+      "docker":{
+        "name": ["all"]
+      },
+      "process": [
+        {
+          "command" : "node",
+          "arguments" : "local-client.js",
+          "multiOutput" : "avg"
+        }
+      ],
+      "interval": 1
+    }
+  }
+  
