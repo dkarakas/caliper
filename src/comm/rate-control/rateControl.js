@@ -66,7 +66,7 @@ let RateControl = class {
             break;
         }
         case 'poisson-rate':{
-            const GaussianRateController = require('./poissonRate.js');
+            const PoissonRateController = require('./poissonRate.js');
             this.controller = new PoissonRateController(blockchain, rateControl.opts);
             break;
         }
