@@ -64,6 +64,8 @@ class PoissonRateController extends RateInterface{
 
         // to avoid constant if/else check with the same result
         this._interpolate = msg.numb ? this._interpolateFromIndex : this._interpolateFromTime;
+
+        this.elapsed = 0;
     }
 
     /**
@@ -75,7 +77,9 @@ class PoissonRateController extends RateInterface{
      */
     async applyRateControl(start, idx, recentResults) {
         let currentSleepTime = this._interpolate(start, this.duration, idx);
-        return currentSleepTime > 5 ? util.sleep(currentSleepTime) : Promise.resolve();
+        let realSleepTime = currentSleepTime + this.elapsed - (Date.now() - start);
+        this.elapsed = this.elapsed + currentSleepTime;
+        return realSleepTime > 5 ? util.sleep(realSleepTime) : Promise.resolve();
     }
 
     /**
