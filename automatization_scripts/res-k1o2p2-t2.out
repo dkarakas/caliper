@@ -1,0 +1,2804 @@
+TAP version 13
+# #######Caliper Test######
+docker-compose -f network/fabric/mynetwork-2-1/docker-compose.yaml up -d
+# create mychannel......
+ok 1 created mychannel successfully
+# Sleep 5s......
+# Join channel......
+# join mychannel
+ok 2 Successfully joined mychannel
+# install all chaincodes......
+[32minfo[39m: [packager/Golang.js]: packaging GOLANG from contract/fabric/exp/go/W1key
+[32minfo[39m: [packager/Golang.js]: packaging GOLANG from contract/fabric/exp/go/W1key
+ok 3 Installed chaincode simple successfully in all peers
+# Instantiate chaincode......
+The chaincode instantiate transaction was valid.
+ok 4 Instantiated chaincode simple successfully 
+# Sleep 5s...
+# ##### testing 'open' ######
+----test round 0----
+started monitor successfully
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 50 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 1,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 50 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 1,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 50 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 1,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 50 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 1,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 50 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 1,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+[Transaction Info] - Submitted: 0 Succ: 0 Fail:0 Unfinished:0
+Info: client 32161 start test runDuration():opening accounts
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 50 } }
+***** { type: 'fixed-rate', opts: { tps: 50 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 50 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 50 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 50 } }
+[Transaction Info] - Submitted: 30 Succ: 0 Fail:0 Unfinished:30
+[Transaction Info] - Submitted: 80 Succ: 53 Fail:0 Unfinished:27
+[Transaction Info] - Submitted: 130 Succ: 63 Fail:0 Unfinished:67
+[Transaction Info] - Submitted: 180 Succ: 105 Fail:0 Unfinished:75
+[Transaction Info] - Submitted: 230 Succ: 169 Fail:0 Unfinished:61
+[Transaction Info] - Submitted: 280 Succ: 259 Fail:0 Unfinished:21
+[Transaction Info] - Submitted: 330 Succ: 310 Fail:0 Unfinished:20
+[Transaction Info] - Submitted: 380 Succ: 310 Fail:0 Unfinished:70
+[Transaction Info] - Submitted: 430 Succ: 363 Fail:0 Unfinished:67
+[Transaction Info] - Submitted: 480 Succ: 415 Fail:0 Unfinished:65
+[Transaction Info] - Submitted: 500 Succ: 468 Fail:0 Unfinished:32
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 500  | 0    | 50 tps    | 1.63 s      | 0.42 s      | 1.00 s      | 47 tps     |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 99.5MB      | 98.9MB      | 46.17%   | 14.39%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 23.6MB      | 22.0MB      | 5.31%    | 4.26%    | 1.1MB      | 608.5KB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 27.7MB      | 25.4MB      | 5.23%    | 4.22%    | 1.1MB      | 610.0KB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 143.3MB     | 132.0MB     | 30.40%   | 24.16%   | 3.1MB      | 3.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 123.1MB     | 117.5MB     | 31.00%   | 24.62%   | 3.1MB      | 8.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.5MB      | 24.5MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 44.1MB      | 37.9MB      | 7.65%    | 6.21%    | 2.2MB      | 3.9MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 5 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+----test round 1----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 100 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 2,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 100 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 2,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 100 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 2,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 100 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 2,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 100 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 2,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 100 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 100 } }
+Info: client 32179 start test runDuration():opening accounts
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 100 } }
+***** { type: 'fixed-rate', opts: { tps: 100 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 100 } }
+[Transaction Info] - Submitted: 500 Succ: 500 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 600 Succ: 500 Fail:0 Unfinished:100
+[Transaction Info] - Submitted: 700 Succ: 605 Fail:0 Unfinished:95
+[Transaction Info] - Submitted: 800 Succ: 705 Fail:0 Unfinished:95
+[Transaction Info] - Submitted: 900 Succ: 810 Fail:0 Unfinished:90
+[Transaction Info] - Submitted: 1000 Succ: 915 Fail:0 Unfinished:85
+[Transaction Info] - Submitted: 1100 Succ: 1015 Fail:0 Unfinished:85
+[Transaction Info] - Submitted: 1200 Succ: 1120 Fail:0 Unfinished:80
+[Transaction Info] - Submitted: 1300 Succ: 1221 Fail:0 Unfinished:79
+[Transaction Info] - Submitted: 1400 Succ: 1325 Fail:0 Unfinished:75
+[Transaction Info] - Submitted: 1500 Succ: 1325 Fail:0 Unfinished:175
+[Transaction Info] - Submitted: 1501 Succ: 1501 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 1001 | 0    | 100 tps   | 1.97 s      | 0.51 s      | 1.14 s      | 93 tps     |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 104.6MB     | 102.7MB     | 23.56%   | 18.72%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 23.9MB      | 23.7MB      | 7.94%    | 6.42%    | 1.8MB      | 894.7KB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 28.1MB      | 27.8MB      | 8.17%    | 6.52%    | 1.8MB      | 912.0KB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 150.8MB     | 148.0MB     | 55.05%   | 45.19%   | 5.5MB      | 13.9MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 130.4MB     | 126.2MB     | 58.42%   | 45.81%   | 5.5MB      | 10.3MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.5MB      | 24.5MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 55.9MB      | 52.1MB      | 14.14%   | 11.22%   | 4.0MB      | 7.2MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 6 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 1501 Succ: 1501 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 1501 Succ: 1501 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 1501 Succ: 1501 Fail:0 Unfinished:0
+----test round 2----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 150 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 3,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 150 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 3,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 150 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 3,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 150 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 3,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 150 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 3,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 150 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 150 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 150 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 150 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 150 } }
+[Transaction Info] - Submitted: 1501 Succ: 1501 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 1645 Succ: 1501 Fail:0 Unfinished:144
+[Transaction Info] - Submitted: 1795 Succ: 1655 Fail:0 Unfinished:140
+[Transaction Info] - Submitted: 2095 Succ: 1960 Fail:0 Unfinished:135
+[Transaction Info] - Submitted: 2245 Succ: 2112 Fail:0 Unfinished:133
+[Transaction Info] - Submitted: 2395 Succ: 2264 Fail:0 Unfinished:131
+[Transaction Info] - Submitted: 2545 Succ: 2415 Fail:0 Unfinished:130
+[Transaction Info] - Submitted: 2695 Succ: 2567 Fail:0 Unfinished:128
+[Transaction Info] - Submitted: 2845 Succ: 2720 Fail:0 Unfinished:125
+[Transaction Info] - Submitted: 2995 Succ: 2871 Fail:0 Unfinished:124
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 1500 | 0    | 150 tps   | 1.72 s      | 0.44 s      | 1.12 s      | 139 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 109.1MB     | 107.4MB     | 31.88%   | 27.80%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 26.1MB      | 24.2MB      | 13.83%   | 10.31%   | 3.2MB      | 1.8MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 30.2MB      | 28.7MB      | 14.10%   | 10.31%   | 3.2MB      | 1.8MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 157.4MB     | 153.8MB     | 81.73%   | 60.27%   | 8.9MB      | 5.4MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 165.2MB     | 145.3MB     | 83.37%   | 61.35%   | 9.0MB      | 30.3MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.5MB      | 24.5MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 68.2MB      | 61.9MB      | 20.05%   | 14.84%   | 6.6MB      | 11.1MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 7 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+----test round 3----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 200 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 4,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 200 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 4,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 200 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 4,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 200 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 4,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 200 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 4,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+txUpdateTime: 1000
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 200 } }
+[Transaction Info] - Submitted: 3001 Succ: 3001 Fail:0 Unfinished:0
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 200 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 200 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 200 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 200 } }
+[Transaction Info] - Submitted: 3196 Succ: 3001 Fail:0 Unfinished:195
+[Transaction Info] - Submitted: 3396 Succ: 3206 Fail:0 Unfinished:190
+[Transaction Info] - Submitted: 3596 Succ: 3407 Fail:0 Unfinished:189
+[Transaction Info] - Submitted: 3796 Succ: 3611 Fail:0 Unfinished:185
+[Transaction Info] - Submitted: 3996 Succ: 3814 Fail:0 Unfinished:182
+[Transaction Info] - Submitted: 4196 Succ: 4016 Fail:0 Unfinished:180
+[Transaction Info] - Submitted: 4396 Succ: 4218 Fail:0 Unfinished:178
+[Transaction Info] - Submitted: 4596 Succ: 4421 Fail:0 Unfinished:175
+[Transaction Info] - Submitted: 4796 Succ: 4623 Fail:0 Unfinished:173
+[Transaction Info] - Submitted: 4996 Succ: 4826 Fail:0 Unfinished:170
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 2001 | 0    | 200 tps   | 1.72 s      | 0.53 s      | 1.12 s      | 186 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 112.1MB     | 111.1MB     | 40.39%   | 34.15%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 26.7MB      | 26.4MB      | 16.24%   | 13.14%   | 3.6MB      | 1.8MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 30.8MB      | 30.5MB      | 16.52%   | 13.28%   | 3.6MB      | 1.8MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 207.7MB     | 183.8MB     | 106.18%  | 86.76%   | 11.4MB     | 20.6MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 217.7MB     | 193.5MB     | 107.65%  | 87.87%   | 11.0MB     | 27.8MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.5MB      | 24.5MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 84.4MB      | 79.7MB      | 25.77%   | 21.21%   | 7.8MB      | 14.6MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 8 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+----test round 4----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 250 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 5,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 250 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 5,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 250 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 5,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 250 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 5,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 250 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 5,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32167 start test runDuration():opening accounts
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 250 } }
+***** { type: 'fixed-rate', opts: { tps: 250 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 250 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 250 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 250 } }
+[Transaction Info] - Submitted: 5002 Succ: 5002 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 5245 Succ: 5002 Fail:0 Unfinished:243
+[Transaction Info] - Submitted: 5495 Succ: 5257 Fail:0 Unfinished:238
+[Transaction Info] - Submitted: 5745 Succ: 5512 Fail:0 Unfinished:233
+[Transaction Info] - Submitted: 5995 Succ: 5762 Fail:0 Unfinished:233
+[Transaction Info] - Submitted: 6245 Succ: 6017 Fail:0 Unfinished:228
+[Transaction Info] - Submitted: 6495 Succ: 6267 Fail:0 Unfinished:228
+[Transaction Info] - Submitted: 6746 Succ: 6522 Fail:0 Unfinished:224
+[Transaction Info] - Submitted: 6996 Succ: 6773 Fail:0 Unfinished:223
+[Transaction Info] - Submitted: 7246 Succ: 7027 Fail:0 Unfinished:219
+[Transaction Info] - Submitted: 7497 Succ: 7282 Fail:0 Unfinished:215
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 2501 | 0    | 250 tps   | 1.74 s      | 0.58 s      | 1.16 s      | 233 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 113.3MB     | 112.0MB     | 46.20%   | 41.48%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 26.6MB      | 26.4MB      | 19.73%   | 16.14%   | 4.9MB      | 2.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 30.7MB      | 30.5MB      | 20.19%   | 16.20%   | 5.0MB      | 2.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 258.4MB     | 231.0MB     | 133.05%  | 105.51%  | 15.1MB     | 8.4MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 280.1MB     | 248.8MB     | 131.45%  | 108.37%  | 15.3MB     | 49.6MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.5MB      | 24.5MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 102.6MB     | 94.6MB      | 31.93%   | 25.87%   | 10.6MB     | 19.9MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 9 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+----test round 5----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 300 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 6,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 300 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 6,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 300 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 6,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 300 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 6,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 300 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 6,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 300 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 300 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 300 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 300 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 300 } }
+[Transaction Info] - Submitted: 7503 Succ: 7503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 7791 Succ: 7503 Fail:0 Unfinished:288
+[Transaction Info] - Submitted: 8091 Succ: 7810 Fail:0 Unfinished:281
+[Transaction Info] - Submitted: 8391 Succ: 8111 Fail:0 Unfinished:280
+[Transaction Info] - Submitted: 8691 Succ: 8416 Fail:0 Unfinished:275
+[Transaction Info] - Submitted: 8991 Succ: 8718 Fail:0 Unfinished:273
+[Transaction Info] - Submitted: 9292 Succ: 9021 Fail:0 Unfinished:271
+[Transaction Info] - Submitted: 9592 Succ: 9326 Fail:0 Unfinished:266
+[Transaction Info] - Submitted: 9893 Succ: 9630 Fail:0 Unfinished:263
+[Transaction Info] - Submitted: 10194 Succ: 9931 Fail:0 Unfinished:263
+[Transaction Info] - Submitted: 10494 Succ: 10236 Fail:0 Unfinished:258
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 3000 | 0    | 299 tps   | 1.90 s      | 0.66 s      | 1.25 s      | 280 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 109.6MB     | 108.7MB     | 56.44%   | 49.22%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 26.5MB      | 26.4MB      | 24.42%   | 20.09%   | 5.3MB      | 2.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 30.8MB      | 30.7MB      | 24.44%   | 20.23%   | 5.3MB      | 2.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 344.0MB     | 310.1MB     | 160.28%  | 132.64%  | 16.4MB     | 41.4MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 347.9MB     | 315.0MB     | 159.94%  | 131.79%  | 16.3MB     | 30.6MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.6MB      | 24.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 119.7MB     | 113.8MB     | 39.03%   | 31.19%   | 11.1MB     | 21.4MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 10 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+----test round 6----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 350 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 7,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 350 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 7,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 350 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 7,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 350 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 7,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 350 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 7,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 350 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 350 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 350 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 350 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 350 } }
+[Transaction Info] - Submitted: 10503 Succ: 10503 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 10839 Succ: 10503 Fail:0 Unfinished:336
+[Transaction Info] - Submitted: 11189 Succ: 10861 Fail:0 Unfinished:328
+[Transaction Info] - Submitted: 11540 Succ: 11217 Fail:0 Unfinished:323
+[Transaction Info] - Submitted: 11892 Succ: 11572 Fail:0 Unfinished:320
+[Transaction Info] - Submitted: 12255 Succ: 11853 Fail:0 Unfinished:402
+[Transaction Info] - Submitted: 12605 Succ: 12278 Fail:0 Unfinished:327
+[Transaction Info] - Submitted: 12955 Succ: 12633 Fail:0 Unfinished:322
+[Transaction Info] - Submitted: 13306 Succ: 12988 Fail:0 Unfinished:318
+[Transaction Info] - Submitted: 13655 Succ: 13343 Fail:0 Unfinished:312
+[Transaction Info] - Submitted: 14002 Succ: 13698 Fail:0 Unfinished:304
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 3501 | 0    | 350 tps   | 1.97 s      | 0.75 s      | 1.33 s      | 323 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 111.2MB     | 110.3MB     | 62.97%   | 55.75%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 26.6MB      | 26.5MB      | 27.88%   | 22.24%   | 6.7MB      | 3.4MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 30.9MB      | 30.8MB      | 27.04%   | 21.89%   | 6.7MB      | 3.4MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 422.5MB     | 378.4MB     | 181.12%  | 149.61%  | 20.8MB     | 22.9MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 432.8MB     | 394.4MB     | 185.43%  | 152.21%  | 21.1MB     | 57.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.6MB      | 24.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 140.6MB     | 131.1MB     | 44.33%   | 34.93%   | 14.1MB     | 27.6MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 11 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+----test round 7----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 400 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 8,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 400 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 8,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 400 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 8,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 400 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 8,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 400 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 8,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 400 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 400 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 400 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 400 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 400 } }
+[Transaction Info] - Submitted: 14004 Succ: 14004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 14390 Succ: 14004 Fail:0 Unfinished:386
+[Transaction Info] - Submitted: 14789 Succ: 14004 Fail:0 Unfinished:785
+[Transaction Info] - Submitted: 15200 Succ: 14813 Fail:0 Unfinished:387
+[Transaction Info] - Submitted: 15618 Succ: 15225 Fail:0 Unfinished:393
+[Transaction Info] - Submitted: 16017 Succ: 15606 Fail:0 Unfinished:411
+[Transaction Info] - Submitted: 16435 Succ: 16037 Fail:0 Unfinished:398
+[Transaction Info] - Submitted: 16833 Succ: 16413 Fail:0 Unfinished:420
+[Transaction Info] - Submitted: 17244 Succ: 16836 Fail:0 Unfinished:408
+[Transaction Info] - Submitted: 17650 Succ: 17237 Fail:0 Unfinished:413
+[Transaction Info] - Submitted: 18004 Succ: 17643 Fail:0 Unfinished:361
+[Transaction Info] - Submitted: 18004 Succ: 17858 Fail:0 Unfinished:146
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 4000 | 0    | 400 tps   | 2.16 s      | 0.83 s      | 1.48 s      | 359 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 118.2MB     | 112.8MB     | 73.60%   | 56.43%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 26.7MB      | 26.6MB      | 28.34%   | 23.49%   | 6.7MB      | 3.3MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 31.2MB      | 31.0MB      | 28.46%   | 23.50%   | 6.7MB      | 3.3MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 525.5MB     | 480.1MB     | 209.78%  | 171.96%  | 21.2MB     | 54.6MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 513.8MB     | 476.4MB     | 207.15%  | 171.64%  | 21.2MB     | 40.2MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.6MB      | 24.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 166.0MB     | 156.8MB     | 45.42%   | 37.96%   | 14.1MB     | 28.2MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 12 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+----test round 8----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 450 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 9,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 450 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 9,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 450 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 9,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 450 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 9,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 450 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 9,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 450 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 450 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 450 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 450 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 450 } }
+[Transaction Info] - Submitted: 18004 Succ: 18004 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 18436 Succ: 18004 Fail:0 Unfinished:432
+[Transaction Info] - Submitted: 18901 Succ: 18096 Fail:0 Unfinished:805
+[Transaction Info] - Submitted: 19356 Succ: 18542 Fail:0 Unfinished:814
+[Transaction Info] - Submitted: 19818 Succ: 18981 Fail:0 Unfinished:837
+[Transaction Info] - Submitted: 20278 Succ: 19452 Fail:0 Unfinished:826
+[Transaction Info] - Submitted: 20729 Succ: 19916 Fail:0 Unfinished:813
+[Transaction Info] - Submitted: 21180 Succ: 20398 Fail:0 Unfinished:782
+[Transaction Info] - Submitted: 21639 Succ: 20836 Fail:0 Unfinished:803
+[Transaction Info] - Submitted: 22089 Succ: 21305 Fail:0 Unfinished:784
+[Transaction Info] - Submitted: 22498 Succ: 21736 Fail:0 Unfinished:762
+[Transaction Info] - Submitted: 22504 Succ: 22345 Fail:0 Unfinished:159
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 4500 | 0    | 450 tps   | 2.33 s      | 1.00 s      | 1.64 s      | 407 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 121.1MB     | 116.8MB     | 77.40%   | 62.60%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 27.0MB      | 26.9MB      | 31.31%   | 23.67%   | 8.4MB      | 4.1MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 31.3MB      | 31.1MB      | 30.68%   | 23.86%   | 8.4MB      | 4.1MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 617.1MB     | 566.8MB     | 224.85%  | 181.90%  | 26.6MB     | 44.2MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 615.4MB     | 571.6MB     | 227.61%  | 183.93%  | 26.7MB     | 59.0MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.6MB      | 24.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 186.9MB     | 176.6MB     | 48.07%   | 39.26%   | 17.9MB     | 35.1MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 13 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 22504 Succ: 22504 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 22504 Succ: 22504 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 22504 Succ: 22504 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 22504 Succ: 22504 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 22504 Succ: 22504 Fail:0 Unfinished:0
+----test round 9----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 500 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 10,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 500 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 10,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 500 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 10,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 500 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 10,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 500 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 10,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32179 start test runDuration():opening accounts
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 500 } }
+***** { type: 'fixed-rate', opts: { tps: 500 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 500 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 500 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 500 } }
+[Transaction Info] - Submitted: 22504 Succ: 22504 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 22985 Succ: 22504 Fail:0 Unfinished:481
+[Transaction Info] - Submitted: 23486 Succ: 22504 Fail:0 Unfinished:982
+[Transaction Info] - Submitted: 24005 Succ: 23194 Fail:0 Unfinished:811
+[Transaction Info] - Submitted: 24503 Succ: 23481 Fail:0 Unfinished:1022
+[Transaction Info] - Submitted: 25022 Succ: 24186 Fail:0 Unfinished:836
+[Transaction Info] - Submitted: 25524 Succ: 24481 Fail:0 Unfinished:1043
+[Transaction Info] - Submitted: 26024 Succ: 24961 Fail:0 Unfinished:1063
+[Transaction Info] - Submitted: 26547 Succ: 25958 Fail:0 Unfinished:589
+[Transaction Info] - Submitted: 27071 Succ: 26448 Fail:0 Unfinished:623
+[Transaction Info] - Submitted: 27491 Succ: 26948 Fail:0 Unfinished:543
+[Transaction Info] - Submitted: 27491 Succ: 27440 Fail:0 Unfinished:51
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 4987 | 0    | 499 tps   | 2.71 s      | 0.87 s      | 1.74 s      | 433 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 120.6MB     | 118.4MB     | 82.20%   | 65.45%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 27.6MB      | 27.3MB      | 29.42%   | 23.79%   | 8.1MB      | 3.8MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 31.6MB      | 31.5MB      | 27.46%   | 22.94%   | 8.1MB      | 3.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 755.3MB     | 689.7MB     | 253.38%  | 205.34%  | 27.9MB     | 67.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 727.4MB     | 672.7MB     | 250.31%  | 204.85%  | 27.9MB     | 49.8MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.6MB      | 24.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 210.2MB     | 201.7MB     | 49.69%   | 40.97%   | 17.7MB     | 38.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 14 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+----test round 10----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 550 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 11,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 550 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 11,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 550 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 11,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 550 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 11,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 550 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 11,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 550 } }
+***** { type: 'fixed-rate', opts: { tps: 550 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 550 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 550 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 550 } }
+[Transaction Info] - Submitted: 27491 Succ: 27491 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 28018 Succ: 27491 Fail:0 Unfinished:527
+[Transaction Info] - Submitted: 28569 Succ: 27491 Fail:0 Unfinished:1078
+[Transaction Info] - Submitted: 29122 Succ: 27991 Fail:0 Unfinished:1131
+[Transaction Info] - Submitted: 29676 Succ: 28491 Fail:0 Unfinished:1185
+[Transaction Info] - Submitted: 30240 Succ: 28991 Fail:0 Unfinished:1249
+[Transaction Info] - Submitted: 30792 Succ: 29533 Fail:0 Unfinished:1259
+[Transaction Info] - Submitted: 31344 Succ: 30063 Fail:0 Unfinished:1281
+[Transaction Info] - Submitted: 31907 Succ: 30763 Fail:0 Unfinished:1144
+[Transaction Info] - Submitted: 32462 Succ: 31451 Fail:0 Unfinished:1011
+[Transaction Info] - Submitted: 32990 Succ: 31951 Fail:0 Unfinished:1039
+[Transaction Info] - Submitted: 32990 Succ: 32951 Fail:0 Unfinished:39
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 5499 | 0    | 550 tps   | 3.18 s      | 0.85 s      | 2.02 s      | 479 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 128.9MB     | 122.9MB     | 89.11%   | 71.24%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 28.7MB      | 28.5MB      | 27.13%   | 22.71%   | 8.2MB      | 3.6MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 32.2MB      | 31.9MB      | 26.95%   | 22.48%   | 8.2MB      | 3.6MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 859.2MB     | 799.5MB     | 272.46%  | 215.91%  | 27.9MB     | 34.3MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 858.2MB     | 795.3MB     | 269.62%  | 221.96%  | 28.1MB     | 93.7MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 24.6MB      | 24.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 231.5MB     | 222.5MB     | 54.92%   | 43.51%   | 18.6MB     | 38.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 15 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 32990 Succ: 32990 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 32990 Succ: 32990 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 32990 Succ: 32990 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 32990 Succ: 32990 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 32990 Succ: 32990 Fail:0 Unfinished:0
+----test round 11----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 600 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 12,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 600 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 12,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 600 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 12,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 600 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 12,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 600 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 12,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32179 start test runDuration():opening accounts
+Info: client 32167 start test runDuration():opening accounts
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 600 } }
+***** { type: 'fixed-rate', opts: { tps: 600 } }
+***** { type: 'fixed-rate', opts: { tps: 600 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 600 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 600 } }
+[Transaction Info] - Submitted: 32990 Succ: 32990 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 33575 Succ: 32990 Fail:0 Unfinished:585
+[Transaction Info] - Submitted: 34209 Succ: 33190 Fail:0 Unfinished:1019
+[Transaction Info] - Submitted: 34814 Succ: 33490 Fail:0 Unfinished:1324
+[Transaction Info] - Submitted: 35419 Succ: 33990 Fail:0 Unfinished:1429
+[Transaction Info] - Submitted: 35937 Succ: 34787 Fail:0 Unfinished:1150
+[Transaction Info] - Submitted: 36440 Succ: 35284 Fail:0 Unfinished:1156
+[Transaction Info] - Submitted: 36802 Succ: 35605 Fail:0 Unfinished:1197
+[Transaction Info] - Submitted: 37414 Succ: 36074 Fail:0 Unfinished:1340
+[Transaction Info] - Submitted: 38024 Succ: 36590 Fail:0 Unfinished:1434
+[Transaction Info] - Submitted: 38606 Succ: 37094 Fail:0 Unfinished:1512
+[Transaction Info] - Submitted: 38991 Succ: 37884 Fail:0 Unfinished:1107
+[Transaction Info] - Submitted: 38991 Succ: 38693 Fail:0 Unfinished:298
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 6001 | 0    | 600 tps   | 3.00 s      | 1.17 s      | 2.16 s      | 506 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 133.0MB     | 127.5MB     | 91.52%   | 75.70%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 29.4MB      | 29.3MB      | 30.98%   | 22.57%   | 8.3MB      | 3.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 32.8MB      | 32.5MB      | 31.31%   | 22.73%   | 8.3MB      | 3.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 929.6MB     | 889.1MB     | 258.87%  | 231.86%  | 29.6MB     | 14.7MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 975.3MB     | 905.9MB     | 285.09%  | 234.92%  | 30.1MB     | 113.7MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 25.2MB      | 0.13%    | 0.02%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 253.8MB     | 245.2MB     | 55.69%   | 45.97%   | 19.2MB     | 42.0MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 16 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 38991 Succ: 38991 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 38991 Succ: 38991 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 38991 Succ: 38991 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 38991 Succ: 38991 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 38991 Succ: 38991 Fail:0 Unfinished:0
+----test round 12----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 650 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 13,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 650 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 13,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 650 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 13,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 650 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 13,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 650 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 13,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 650 } }
+***** { type: 'fixed-rate', opts: { tps: 650 } }
+Info: client 32179 start test runDuration():opening accounts
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 650 } }
+***** { type: 'fixed-rate', opts: { tps: 650 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 650 } }
+[Transaction Info] - Submitted: 38991 Succ: 38991 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 39623 Succ: 38991 Fail:0 Unfinished:632
+[Transaction Info] - Submitted: 40295 Succ: 38991 Fail:0 Unfinished:1304
+[Transaction Info] - Submitted: 40950 Succ: 39491 Fail:0 Unfinished:1459
+[Transaction Info] - Submitted: 41617 Succ: 39991 Fail:0 Unfinished:1626
+[Transaction Info] - Submitted: 42148 Succ: 40393 Fail:0 Unfinished:1755
+[Transaction Info] - Submitted: 42799 Succ: 40894 Fail:0 Unfinished:1905
+[Transaction Info] - Submitted: 43215 Succ: 41101 Fail:0 Unfinished:2114
+[Transaction Info] - Submitted: 43637 Succ: 41404 Fail:0 Unfinished:2233
+[Transaction Info] - Submitted: 44303 Succ: 41893 Fail:0 Unfinished:2410
+[Transaction Info] - Submitted: 44981 Succ: 42084 Fail:0 Unfinished:2897
+[Transaction Info] - Submitted: 45472 Succ: 42600 Fail:0 Unfinished:2872
+[Transaction Info] - Submitted: 45472 Succ: 43287 Fail:0 Unfinished:2185
+[Transaction Info] - Submitted: 45472 Succ: 44115 Fail:0 Unfinished:1357
+[Transaction Info] - Submitted: 45472 Succ: 44984 Fail:0 Unfinished:488
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 6481 | 0    | 648 tps   | 5.71 s      | 1.38 s      | 3.78 s      | 462 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 135.4MB     | 133.4MB     | 95.84%   | 65.33%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 29.6MB      | 29.5MB      | 30.14%   | 15.85%   | 11.1MB     | 4.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 33.3MB      | 33.0MB      | 28.97%   | 15.77%   | 11.0MB     | 4.6MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.0GB       | 990.4MB     | 257.73%  | 172.90%  | 36.6MB     | 66.2MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.0GB       | 1006.8MB    | 276.33%  | 174.10%  | 36.7MB     | 89.8MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 26.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 277.3MB     | 268.9MB     | 58.26%   | 32.56%   | 25.2MB     | 49.8MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 17 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+----test round 13----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 700 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 14,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 700 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 14,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 700 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 14,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 700 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 14,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 700 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 14,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 700 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 700 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 700 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 700 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 700 } }
+[Transaction Info] - Submitted: 45472 Succ: 45472 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 46150 Succ: 45472 Fail:0 Unfinished:678
+[Transaction Info] - Submitted: 46871 Succ: 45472 Fail:0 Unfinished:1399
+[Transaction Info] - Submitted: 47640 Succ: 45972 Fail:0 Unfinished:1668
+[Transaction Info] - Submitted: 48436 Succ: 46472 Fail:0 Unfinished:1964
+[Transaction Info] - Submitted: 49236 Succ: 46682 Fail:0 Unfinished:2554
+[Transaction Info] - Submitted: 49960 Succ: 47198 Fail:0 Unfinished:2762
+[Transaction Info] - Submitted: 50733 Succ: 47371 Fail:0 Unfinished:3362
+[Transaction Info] - Submitted: 51481 Succ: 47805 Fail:0 Unfinished:3676
+[Transaction Info] - Submitted: 52217 Succ: 48220 Fail:0 Unfinished:3997
+[Transaction Info] - Submitted: 52368 Succ: 48909 Fail:0 Unfinished:3459
+[Transaction Info] - Submitted: 52368 Succ: 49706 Fail:0 Unfinished:2662
+[Transaction Info] - Submitted: 52368 Succ: 50372 Fail:0 Unfinished:1996
+[Transaction Info] - Submitted: 52368 Succ: 51420 Fail:0 Unfinished:948
+[Transaction Info] - Submitted: 52368 Succ: 52092 Fail:0 Unfinished:276
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 6896 | 0    | 690 tps   | 7.87 s      | 1.92 s      | 4.85 s      | 464 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 138.8MB     | 135.1MB     | 100.40%  | 68.42%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 30.9MB      | 30.2MB      | 28.05%   | 17.47%   | 10.5MB     | 4.2MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 34.9MB      | 34.5MB      | 27.90%   | 17.56%   | 10.5MB     | 4.3MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.1GB       | 1.1GB       | 264.18%  | 202.07%  | 37.6MB     | 93.3MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.1GB       | 1.1GB       | 279.27%  | 198.85%  | 37.6MB     | 68.4MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 26.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 315.3MB     | 296.7MB     | 58.08%   | 36.10%   | 24.7MB     | 52.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 18 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+----test round 14----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 750 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 15,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 750 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 15,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 750 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 15,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 750 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 15,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 750 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 15,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 750 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 750 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 750 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 750 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 750 } }
+[Transaction Info] - Submitted: 52368 Succ: 52368 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 53092 Succ: 52368 Fail:0 Unfinished:724
+[Transaction Info] - Submitted: 53901 Succ: 52368 Fail:0 Unfinished:1533
+[Transaction Info] - Submitted: 54715 Succ: 52769 Fail:0 Unfinished:1946
+[Transaction Info] - Submitted: 55593 Succ: 53177 Fail:0 Unfinished:2416
+[Transaction Info] - Submitted: 56446 Succ: 53368 Fail:0 Unfinished:3078
+[Transaction Info] - Submitted: 57325 Succ: 53795 Fail:0 Unfinished:3530
+[Transaction Info] - Submitted: 57871 Succ: 54100 Fail:0 Unfinished:3771
+[Transaction Info] - Submitted: 58734 Succ: 54652 Fail:0 Unfinished:4082
+[Transaction Info] - Submitted: 59250 Succ: 54868 Fail:0 Unfinished:4382
+[Transaction Info] - Submitted: 59790 Succ: 55228 Fail:0 Unfinished:4562
+[Transaction Info] - Submitted: 59793 Succ: 55852 Fail:0 Unfinished:3941
+[Transaction Info] - Submitted: 59793 Succ: 56695 Fail:0 Unfinished:3098
+[Transaction Info] - Submitted: 59793 Succ: 57506 Fail:0 Unfinished:2287
+[Transaction Info] - Submitted: 59793 Succ: 58052 Fail:0 Unfinished:1741
+[Transaction Info] - Submitted: 59793 Succ: 59026 Fail:0 Unfinished:767
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 7425 | 0    | 743 tps   | 8.87 s      | 1.73 s      | 5.63 s      | 467 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 142.2MB     | 138.5MB     | 97.65%   | 67.96%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 31.1MB      | 30.9MB      | 31.07%   | 18.38%   | 10.0MB     | 4.0MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 37.4MB      | 36.2MB      | 31.50%   | 18.58%   | 10.0MB     | 4.0MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.2GB       | 1.1GB       | 262.38%  | 207.28%  | 36.9MB     | 43.0MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.2GB       | 1.1GB       | 281.02%  | 214.72%  | 37.3MB     | 121.8MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 26.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 342.3MB     | 333.2MB     | 56.34%   | 38.91%   | 24.3MB     | 52.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 19 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+----test round 15----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 800 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 16,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 800 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 16,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 800 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 16,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 800 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 16,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 800 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 16,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 800 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 800 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 800 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 800 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 800 } }
+[Transaction Info] - Submitted: 59793 Succ: 59793 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 60604 Succ: 59793 Fail:0 Unfinished:811
+[Transaction Info] - Submitted: 61547 Succ: 59793 Fail:0 Unfinished:1754
+[Transaction Info] - Submitted: 62291 Succ: 60112 Fail:0 Unfinished:2179
+[Transaction Info] - Submitted: 63352 Succ: 60399 Fail:0 Unfinished:2953
+[Transaction Info] - Submitted: 64054 Succ: 60886 Fail:0 Unfinished:3168
+[Transaction Info] - Submitted: 64281 Succ: 61007 Fail:0 Unfinished:3274
+[Transaction Info] - Submitted: 65590 Succ: 61491 Fail:0 Unfinished:4099
+[Transaction Info] - Submitted: 65937 Succ: 61635 Fail:0 Unfinished:4302
+[Transaction Info] - Submitted: 67084 Succ: 62049 Fail:0 Unfinished:5035
+[Transaction Info] - Submitted: 67546 Succ: 62554 Fail:0 Unfinished:4992
+[Transaction Info] - Submitted: 67546 Succ: 63389 Fail:0 Unfinished:4157
+[Transaction Info] - Submitted: 67546 Succ: 64399 Fail:0 Unfinished:3147
+[Transaction Info] - Submitted: 67546 Succ: 65178 Fail:0 Unfinished:2368
+[Transaction Info] - Submitted: 67546 Succ: 66063 Fail:0 Unfinished:1483
+[Transaction Info] - Submitted: 67546 Succ: 67101 Fail:0 Unfinished:445
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 7753 | 0    | 775 tps   | 13.37 s     | 1.90 s      | 5.74 s      | 487 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 157.2MB     | 147.6MB     | 99.21%   | 71.15%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 37.5MB      | 33.8MB      | 30.80%   | 18.92%   | 10.4MB     | 4.1MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 37.5MB      | 37.3MB      | 30.42%   | 19.12%   | 10.5MB     | 4.2MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.3GB       | 1.2GB       | 270.01%  | 214.18%  | 38.6MB     | 43.7MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.3GB       | 1.2GB       | 288.10%  | 223.08%  | 39.0MB     | 121.9MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 26.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 398.5MB     | 371.7MB     | 129.72%  | 42.29%   | 25.9MB     | 54.9MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 20 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+----test round 16----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 850 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 17,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 850 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 17,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 850 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 17,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 850 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 17,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 850 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 17,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 850 } }
+Info: client 32185 start test runDuration():opening accounts
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 850 } }
+***** { type: 'fixed-rate', opts: { tps: 850 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 850 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 850 } }
+[Transaction Info] - Submitted: 67546 Succ: 67546 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 68429 Succ: 67546 Fail:0 Unfinished:883
+[Transaction Info] - Submitted: 69319 Succ: 67546 Fail:0 Unfinished:1773
+[Transaction Info] - Submitted: 69941 Succ: 67546 Fail:0 Unfinished:2395
+[Transaction Info] - Submitted: 70747 Succ: 67546 Fail:0 Unfinished:3201
+[Transaction Info] - Submitted: 71849 Succ: 67942 Fail:0 Unfinished:3907
+[Transaction Info] - Submitted: 72236 Succ: 68052 Fail:0 Unfinished:4184
+[Transaction Info] - Submitted: 73455 Succ: 68465 Fail:0 Unfinished:4990
+[Transaction Info] - Submitted: 74112 Succ: 68649 Fail:0 Unfinished:5463
+[Transaction Info] - Submitted: 74900 Succ: 69132 Fail:0 Unfinished:5768
+[Transaction Info] - Submitted: 75807 Succ: 69876 Fail:0 Unfinished:5931
+[Transaction Info] - Submitted: 75843 Succ: 70046 Fail:0 Unfinished:5797
+[Transaction Info] - Submitted: 75843 Succ: 70886 Fail:0 Unfinished:4957
+[Transaction Info] - Submitted: 75843 Succ: 72612 Fail:0 Unfinished:3231
+[Transaction Info] - Submitted: 75843 Succ: 73314 Fail:0 Unfinished:2529
+[Transaction Info] - Submitted: 75843 Succ: 73999 Fail:0 Unfinished:1844
+[Transaction Info] - Submitted: 75843 Succ: 75499 Fail:0 Unfinished:344
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 8297 | 0    | 825 tps   | 14.98 s     | 3.09 s      | 6.91 s      | 496 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 160.8MB     | 152.9MB     | 98.00%   | 71.85%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 38.2MB      | 37.7MB      | 32.77%   | 20.27%   | 11.4MB     | 4.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 38.0MB      | 37.7MB      | 31.81%   | 20.30%   | 11.3MB     | 4.5MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.3GB       | 1.3GB       | 267.48%  | 231.54%  | 41.4MB     | 41.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.3GB       | 1.3GB       | 294.70%  | 235.72%  | 41.9MB     | 120.4MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 26.6MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 446.9MB     | 421.2MB     | 94.77%   | 46.21%   | 27.9MB     | 59.1MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 21 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+----test round 17----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 900 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 18,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 900 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 18,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 900 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 18,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 900 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 18,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 900 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 18,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32185 start test runDuration():opening accounts
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 900 } }
+***** { type: 'fixed-rate', opts: { tps: 900 } }
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 900 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 900 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 900 } }
+[Transaction Info] - Submitted: 75843 Succ: 75843 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 76784 Succ: 75843 Fail:0 Unfinished:941
+[Transaction Info] - Submitted: 77797 Succ: 75843 Fail:0 Unfinished:1954
+[Transaction Info] - Submitted: 78932 Succ: 75843 Fail:0 Unfinished:3089
+[Transaction Info] - Submitted: 79547 Succ: 75950 Fail:0 Unfinished:3597
+[Transaction Info] - Submitted: 80408 Succ: 76158 Fail:0 Unfinished:4250
+[Transaction Info] - Submitted: 81206 Succ: 76446 Fail:0 Unfinished:4760
+[Transaction Info] - Submitted: 82020 Succ: 76622 Fail:0 Unfinished:5398
+[Transaction Info] - Submitted: 82202 Succ: 76622 Fail:0 Unfinished:5580
+[Transaction Info] - Submitted: 83864 Succ: 77157 Fail:0 Unfinished:6707
+[Transaction Info] - Submitted: 84394 Succ: 77683 Fail:0 Unfinished:6711
+[Transaction Info] - Submitted: 84483 Succ: 78589 Fail:0 Unfinished:5894
+[Transaction Info] - Submitted: 84483 Succ: 78589 Fail:0 Unfinished:5894
+[Transaction Info] - Submitted: 84483 Succ: 80152 Fail:0 Unfinished:4331
+[Transaction Info] - Submitted: 84483 Succ: 80982 Fail:0 Unfinished:3501
+[Transaction Info] - Submitted: 84483 Succ: 81741 Fail:0 Unfinished:2742
+[Transaction Info] - Submitted: 84483 Succ: 82682 Fail:0 Unfinished:1801
+[Transaction Info] - Submitted: 84483 Succ: 83616 Fail:0 Unfinished:867
+[Transaction Info] - Submitted: 84483 Succ: 84129 Fail:0 Unfinished:354
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 8640 | 0    | 864 tps   | 12.50 s     | 3.76 s      | 7.80 s      | 470 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 165.9MB     | 159.9MB     | 99.20%   | 67.36%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 38.0MB      | 37.5MB      | 33.21%   | 16.59%   | 12.6MB     | 4.9MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 48.0MB      | 42.7MB      | 28.55%   | 16.52%   | 12.6MB     | 5.0MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.4GB       | 1.3GB       | 275.47%  | 194.82%  | 44.6MB     | 110.1MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.4GB       | 1.4GB       | 280.34%  | 197.97%  | 44.6MB     | 84.7MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 25.2MB      | 0.11%    | 0.01%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 479.4MB     | 466.4MB     | 97.96%   | 36.19%   | 31.0MB     | 61.8MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 22 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 84483 Succ: 84483 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 84483 Succ: 84483 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 84483 Succ: 84483 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 84483 Succ: 84483 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 84483 Succ: 84483 Fail:0 Unfinished:0
+----test round 18----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 950 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 19,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 950 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 19,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 950 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 19,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 950 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 19,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 950 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 19,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32167 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 950 } }
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 950 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 950 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 950 } }
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 950 } }
+[Transaction Info] - Submitted: 84483 Succ: 84483 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 85546 Succ: 84483 Fail:0 Unfinished:1063
+[Transaction Info] - Submitted: 85944 Succ: 84483 Fail:0 Unfinished:1461
+[Transaction Info] - Submitted: 86788 Succ: 84483 Fail:0 Unfinished:2305
+[Transaction Info] - Submitted: 87902 Succ: 84483 Fail:0 Unfinished:3419
+[Transaction Info] - Submitted: 89042 Succ: 84691 Fail:0 Unfinished:4351
+[Transaction Info] - Submitted: 89685 Succ: 84891 Fail:0 Unfinished:4794
+[Transaction Info] - Submitted: 90642 Succ: 85188 Fail:0 Unfinished:5454
+[Transaction Info] - Submitted: 91069 Succ: 85188 Fail:0 Unfinished:5881
+[Transaction Info] - Submitted: 92094 Succ: 85383 Fail:0 Unfinished:6711
+[Transaction Info] - Submitted: 93541 Succ: 85690 Fail:0 Unfinished:7851
+[Transaction Info] - Submitted: 93813 Succ: 86329 Fail:0 Unfinished:7484
+[Transaction Info] - Submitted: 93813 Succ: 86574 Fail:0 Unfinished:7239
+[Transaction Info] - Submitted: 93813 Succ: 86991 Fail:0 Unfinished:6822
+[Transaction Info] - Submitted: 93813 Succ: 87591 Fail:0 Unfinished:6222
+[Transaction Info] - Submitted: 93813 Succ: 89050 Fail:0 Unfinished:4763
+[Transaction Info] - Submitted: 93813 Succ: 90476 Fail:0 Unfinished:3337
+[Transaction Info] - Submitted: 93813 Succ: 90675 Fail:0 Unfinished:3138
+[Transaction Info] - Submitted: 93813 Succ: 91565 Fail:0 Unfinished:2248
+[Transaction Info] - Submitted: 93813 Succ: 92599 Fail:0 Unfinished:1214
+[Transaction Info] - Submitted: 93813 Succ: 93353 Fail:0 Unfinished:460
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 9330 | 0    | 933 tps   | 14.49 s     | 2.91 s      | 9.21 s      | 462 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 172.9MB     | 164.3MB     | 98.43%   | 65.87%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 37.9MB      | 37.6MB      | 33.36%   | 16.11%   | 14.4MB     | 5.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 48.4MB      | 48.1MB      | 38.51%   | 16.13%   | 14.4MB     | 5.7MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.4GB       | 1.4GB       | 264.15%  | 193.51%  | 50.8MB     | 91.5MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.4GB       | 1.4GB       | 280.16%  | 197.96%  | 51.0MB     | 122.2MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 25.1MB      | 25.1MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 515.0MB     | 499.2MB     | 99.92%   | 34.51%   | 34.7MB     | 70.7MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 23 passed 'open' testing
+wait 5 seconds for next round...
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+----test round 19----
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 1000 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 20,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 4 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 1000 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 20,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 3 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 1000 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 20,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 1 }
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 1000 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 20,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 0 }
+txUpdateTime: 1000
+doTest() with: { type: 'test',
+  label: 'open',
+  rateControl: { type: 'fixed-rate', opts: { tps: 1000 } },
+  trim: 0,
+  args: { money: 10000 },
+  cb: 'benchmark/exp/open_1.js',
+  config: 'benchmark/exp/network-k1o2p1.json',
+  txDuration: 10,
+  roundIdx: 20,
+  totalClients: 5,
+  clients: 5,
+  clientargs: {},
+  clientIdx: 2 }
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+txUpdateTime: 1000
+Info: client 32179 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 1000 } }
+Info: client 32167 start test runDuration():opening accounts
+Info: client 32185 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 1000 } }
+***** { type: 'fixed-rate', opts: { tps: 1000 } }
+Info: client 32166 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 1000 } }
+Info: client 32161 start test runDuration():opening accounts
+***** { type: 'fixed-rate', opts: { tps: 1000 } }
+[Transaction Info] - Submitted: 93813 Succ: 93813 Fail:0 Unfinished:0
+[Transaction Info] - Submitted: 94921 Succ: 93813 Fail:0 Unfinished:1108
+[Transaction Info] - Submitted: 96010 Succ: 93813 Fail:0 Unfinished:2197
+[Transaction Info] - Submitted: 96453 Succ: 93813 Fail:0 Unfinished:2640
+[Transaction Info] - Submitted: 97564 Succ: 93884 Fail:0 Unfinished:3680
+[Transaction Info] - Submitted: 98360 Succ: 93987 Fail:0 Unfinished:4373
+[Transaction Info] - Submitted: 100425 Succ: 94261 Fail:0 Unfinished:6164
+[Transaction Info] - Submitted: 100942 Succ: 94508 Fail:0 Unfinished:6434
+[Transaction Info] - Submitted: 101239 Succ: 94508 Fail:0 Unfinished:6731
+[Transaction Info] - Submitted: 102945 Succ: 95012 Fail:0 Unfinished:7933
+[Transaction Info] - Submitted: 103528 Succ: 95463 Fail:0 Unfinished:8065
+[Transaction Info] - Submitted: 103576 Succ: 95960 Fail:0 Unfinished:7616
+[Transaction Info] - Submitted: 103576 Succ: 96806 Fail:0 Unfinished:6770
+[Transaction Info] - Submitted: 103576 Succ: 96974 Fail:0 Unfinished:6602
+[Transaction Info] - Submitted: 103576 Succ: 97646 Fail:0 Unfinished:5930
+[Transaction Info] - Submitted: 103576 Succ: 98674 Fail:0 Unfinished:4902
+[Transaction Info] - Submitted: 103576 Succ: 98939 Fail:0 Unfinished:4637
+[Transaction Info] - Submitted: 103576 Succ: 99382 Fail:0 Unfinished:4194
+[Transaction Info] - Submitted: 103576 Succ: 100335 Fail:0 Unfinished:3241
+[Transaction Info] - Submitted: 103576 Succ: 101390 Fail:0 Unfinished:2186
+[Transaction Info] - Submitted: 103576 Succ: 102244 Fail:0 Unfinished:1332
+[Transaction Info] - Submitted: 103576 Succ: 102971 Fail:0 Unfinished:605
+[Transaction Info] - Submitted: 103576 Succ: 103576 Fail:0 Unfinished:0
+###test result:###
++------+------+------+-----------+-------------+-------------+-------------+------------+
+| Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|-----------|-------------|-------------|-------------|------------|
+| open | 9763 | 0    | 976 tps   | 18.36 s     | 3.17 s      | 10.18 s     | 438 tps    |
++------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats ###
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | Memory(avg) | CPU(max) | CPU(avg) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 180.0MB     | 172.1MB     | 98.43%   | 62.93%   | -          | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 40.5MB      | 38.8MB      | 32.21%   | 15.48%   | 15.4MB     | 6.0MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 51.1MB      | 49.4MB      | 30.28%   | 15.68%   | 15.4MB     | 6.0MB       |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.5GB       | 1.4GB       | 299.76%  | 189.74%  | 53.7MB     | 131.1MB     |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.5GB       | 1.5GB       | 292.26%  | 190.96%  | 53.5MB     | 96.8MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 25.1MB      | 25.1MB      | 0.00%    | 0.00%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 550.4MB     | 535.3MB     | 113.81%  | 33.38%   | 36.9MB     | 74.1MB      |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|-------------|----------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0B          | 0.00%    | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+-------------+----------+----------+------------+-------------+
+
+ok 24 passed 'open' testing
+----------finished test----------
+
+###all test results:###
++------+------+------+------+-----------+-------------+-------------+-------------+------------+
+| Test | Name | Succ | Fail | Send Rate | Max Latency | Min Latency | Avg Latency | Throughput |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 1    | open | 500  | 0    | 50 tps    | 1.63 s      | 0.42 s      | 1.00 s      | 60 tps     |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 2    | open | 1001 | 0    | 100 tps   | 1.97 s      | 0.51 s      | 1.14 s      | 93 tps     |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 3    | open | 1500 | 0    | 150 tps   | 1.72 s      | 0.44 s      | 1.12 s      | 139 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 4    | open | 2001 | 0    | 200 tps   | 1.72 s      | 0.53 s      | 1.12 s      | 186 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 5    | open | 2501 | 0    | 250 tps   | 1.74 s      | 0.58 s      | 1.16 s      | 233 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 6    | open | 3000 | 0    | 299 tps   | 1.90 s      | 0.66 s      | 1.25 s      | 280 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 7    | open | 3501 | 0    | 350 tps   | 1.97 s      | 0.75 s      | 1.33 s      | 323 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 8    | open | 4000 | 0    | 400 tps   | 2.16 s      | 0.83 s      | 1.48 s      | 359 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 9    | open | 4500 | 0    | 450 tps   | 2.33 s      | 1.00 s      | 1.64 s      | 407 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 10   | open | 4987 | 0    | 499 tps   | 2.71 s      | 0.87 s      | 1.74 s      | 433 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 11   | open | 5499 | 0    | 550 tps   | 3.18 s      | 0.85 s      | 2.02 s      | 479 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 12   | open | 6001 | 0    | 600 tps   | 3.00 s      | 1.17 s      | 2.16 s      | 506 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 13   | open | 6481 | 0    | 648 tps   | 5.71 s      | 1.38 s      | 3.78 s      | 462 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 14   | open | 6896 | 0    | 690 tps   | 7.87 s      | 1.92 s      | 4.85 s      | 464 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 15   | open | 7425 | 0    | 743 tps   | 8.87 s      | 1.73 s      | 5.63 s      | 467 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 16   | open | 7753 | 0    | 775 tps   | 13.37 s     | 1.90 s      | 5.74 s      | 487 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 17   | open | 8297 | 0    | 825 tps   | 14.98 s     | 3.09 s      | 6.91 s      | 496 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 18   | open | 8640 | 0    | 864 tps   | 12.50 s     | 3.76 s      | 7.80 s      | 470 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 19   | open | 9330 | 0    | 933 tps   | 14.49 s     | 2.91 s      | 9.21 s      | 462 tps    |
+|------|------|------|------|-----------|-------------|-------------|-------------|------------|
+| 20   | open | 9763 | 0    | 976 tps   | 18.36 s     | 3.17 s      | 10.18 s     | 438 tps    |
++------+------+------+------+-----------+-------------+-------------+-------------+------------+
+
+### resource stats (maximum) ###
++---------+-----------------------------------+-------------+----------+------------+-------------+
+| TYPE    | NAME                              | Memory(max) | CPU(max) | Traffic In | Traffic Out |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Process | node local-client.js(avg)         | 180.0MB     | 100.40%  | -          | -           |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | dev-peer0.org1.example.co...le-v0 | 40.5MB      | 33.36%   | 15.4MB     | 6.0MB       |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | dev-peer0.org2.example.co...le-v0 | 51.1MB      | 38.51%   | 15.4MB     | 6.0MB       |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | peer0.org2.example.com            | 1.5GB       | 299.76%  | 53.7MB     | 131.1MB     |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | peer0.org1.example.com            | 1.5GB       | 294.70%  | 53.5MB     | 123.5MB     |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | ca_peerOrg1                       | 0B          | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_ca_1_37b2fb...822f4 | 26.6MB      | 0.14%    | 0B         | 0B          |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | orderer.example.com               | 550.4MB     | 129.72%  | 36.9MB     | 74.1MB      |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | ca_peerOrg2                       | 0B          | 0.00%    | 0B         | -           |
+|---------|-----------------------------------|-------------|----------|------------|-------------|
+| Docker  | mynetwork-2-1_peer_1_5f35...7e65b | 0B          | 0.00%    | 0B         | -           |
++---------+-----------------------------------+-------------+----------+------------+-------------+
+
+[Transaction Info] - Submitted: 103576 Succ: 103576 Fail:0 Unfinished:0
+Generated report at /home/q7duan/gopath/src/github.com/hyperledger/caliper/report20181125T214156.html
+docker-compose -f network/fabric/mynetwork-2-1/docker-compose.yaml down;docker rm $(docker ps -aq);docker rmi $(docker images dev* -q)
+Client exited 
+Client exited 
+Client exited 
+Client exited 
+Client exited 
+c253dbf1c49b
+96c990ca3655
+Untagged: dev-peer0.org1.example.com-simple-v0-b845a7f88df0bd3a47a573b80bd5cfab0986278f024e8667a3c90fb0eb1f4d6d:latest
+Deleted: sha256:c614cb1635061d7e483c082f8201ec6729fdcbe655e37435e15aaa4e348d0add
+Deleted: sha256:c01c4ff9ddf82e98f17230c11600bfc1a5db08cb112f6249f5050a1194b99803
+Deleted: sha256:fc4df33e95311af2d6099f0d464325ec82b33bd91c7999f25f3bf4dce60ac767
+Untagged: dev-peer0.org2.example.com-simple-v0-7ebccf7a7fd05d8ac0a55ea61f1f0397ca89de629cef5f537c0950ecf302d423:latest
+Deleted: sha256:4e8b2a167a6d5f7fa5d005d91efa72fb086a06f6ace2f34d897045de259a0be8
+Deleted: sha256:1a4708aae7e0032341f00fe6a184fef328bfcf665def0cd040ccf68f42bf1868
+Deleted: sha256:3ac44e0b5fdb70a5db3af5cd18061baa57fd4118c41f604835cfef46ed64b711
+Deleted: sha256:0722eebfc1942338dce3ade2c953bdafdd2c2fb3c7e9e0563ced97bc0e08855a
+
+1..24
+# tests 24
+# pass  24
+
+# ok
+
