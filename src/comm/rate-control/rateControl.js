@@ -60,6 +60,16 @@ let RateControl = class {
             this.controller = new LinearRateController(blockchain, rateControl.opts);
             break;
         }
+        case 'gaussian-rate':{
+            const GaussianRateController = require('./gaussianRate.js');
+            this.controller = new GaussianRateController(blockchain, rateControl.opts);
+            break;
+        }
+        case 'poisson-rate':{
+            const GaussianRateController = require('./poissonRate.js');
+            this.controller = new PoissonRateController(blockchain, rateControl.opts);
+            break;
+        }
         default:
             throw new Error('Unknown rate control type ' + rateControl.type);
         }
