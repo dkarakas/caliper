@@ -101,7 +101,6 @@ class PoissonRateController extends RateInterface{
      * @private
      */
     _interpolateFromTime(start, duration, idx) {
-        /*
         let L = Math.exp(-this.lambda);
         let k = 0;
         let p = 1;
@@ -110,8 +109,7 @@ class PoissonRateController extends RateInterface{
             let u = Math.random();
             p = p * u;
         }while(p > L);
-        return k - 1;*/
-        return 10;
+        return k - 1;
     }
 }
 
