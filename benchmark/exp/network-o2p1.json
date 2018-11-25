@@ -56,7 +56,7 @@
         "deployed": false
       }
     ],
-    "chaincodes": [{"id": "exp", "path": "contract/fabric/exp/go/W1key", "language":"golang", "version": "v0", "channel": "mychannel"}],
+    "chaincodes": [{"id": "simple", "path": "contract/fabric/exp/go/W1key", "language":"golang", "version": "v0", "channel": "mychannel"}],
     "endorsement-policy": {
       "identities": [
         {
