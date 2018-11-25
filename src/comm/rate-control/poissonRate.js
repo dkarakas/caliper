@@ -57,7 +57,7 @@ class PoissonRateController extends RateInterface{
      */
     async init(msg) {
         // distributing TPS among clients
-        this.lambda = msg.clients / Number(this.options.expectedRate) * 1000 / 5;
+        this.lambda = msg.totalClients / Number(this.options.expectedRate) * 1000;
 
         // based on linear interpolation between two points with (time/index, sleep time) axes
         this.duration = msg.numb? msg.numb : msg.txDuration * 1000;
@@ -74,7 +74,7 @@ class PoissonRateController extends RateInterface{
      * @return {Promise} A promise that will resolve after the necessary time to keep the defined Tx rate.
      */
     async applyRateControl(start, idx, recentResults) {
-        let currentSleepTime = this._interpolate(start, this.duration, idx) * 5;
+        let currentSleepTime = this._interpolate(start, this.duration, idx);
         return currentSleepTime > 5 ? util.sleep(currentSleepTime) : Promise.resolve();
     }
 
@@ -97,6 +97,7 @@ class PoissonRateController extends RateInterface{
      * @private
      */
     _interpolateFromTime(start, duration, idx) {
+        /*
         let L = Math.exp(-this.lambda);
         let k = 0;
         let p = 1;
@@ -105,7 +106,8 @@ class PoissonRateController extends RateInterface{
             let u = Math.random();
             p = p * u;
         }while(p > L);
-        return k - 1;
+        return k - 1;*/
+        return 10;
     }
 }
 
