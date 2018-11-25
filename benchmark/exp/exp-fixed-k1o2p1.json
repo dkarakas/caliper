@@ -1,7 +1,7 @@
 {
     "blockchain": {
       "type": "fabric",
-      "config": "benchmark/exp/network-o2p1.json"
+      "config": "benchmark/exp/network-k1o2p1.json"
     },
     "command" : {
       "start": "docker-compose -f network/fabric/mynetwork-2-1/docker-compose.yaml up -d",
