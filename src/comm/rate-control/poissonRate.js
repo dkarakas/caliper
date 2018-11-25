@@ -57,7 +57,7 @@ class PoissonRateController extends RateInterface{
      */
     async init(msg) {
         // distributing TPS among clients
-        this.lambda = msg.clients / Number(this.options.expectedRate);
+        this.lambda = msg.clients / Number(this.options.expectedRate) * 1000;
 
         // based on linear interpolation between two points with (time/index, sleep time) axes
         this.duration = msg.numb? msg.numb : msg.txDuration * 1000;
