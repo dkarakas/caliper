@@ -9,6 +9,7 @@ peers = [1, 2, 3]
 exp_root = "./benchmark/exp"
 main_file = '/'.join([exp_root, 'main.js'])
 res_folder = "./res"
+bash_script = './run_single.sh'
 
 def run_exp(arg_tuple, trail):
     print('Running trail '+ str(trail) + ' exp ' + str(arg_tuple))
@@ -18,7 +19,7 @@ def run_exp(arg_tuple, trail):
     out_file = '/'.join([res_folder, out_file])
     err_file = ''.join([d, '-k', str(k), 'o', str(o), 'p', str(p), '-t', str(trail), '.err'])
     err_file = '/'.join([res_folder, err_file])
-    subprocess.call(['node', main_file, '-c', conf_file, '1>'+out_file, '2>'+err_file])
+    subprocess.call([bash_script, conf_file, out_file, err_file])
 
 
 if len(sys.argv) < 3:
