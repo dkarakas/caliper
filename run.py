@@ -13,7 +13,7 @@ res_folder = "./res"
 def run_exp(arg_tuple, trail):
     print('Running trail '+ str(trail) + ' exp ' + str(arg_tuple))
     d, k, o, p = arg_tuple
-    conf_file = ''.join([exp_root, '/', "exp-", d, '-k', str(k), 'o', str(o), 'p', str(p), '.json'])
+    conf_file = ''.join(["exp-", d, '-k', str(k), 'o', str(o), 'p', str(p), '.json'])
     out_file = ''.join([d, '-k', str(k), 'o', str(o), 'p', str(p), '-t', str(trail), '.out'])
     out_file = '/'.join([res_folder, out_file])
     err_file = ''.join([d, '-k', str(k), 'o', str(o), 'p', str(p), '-t', str(trail), '.err'])
