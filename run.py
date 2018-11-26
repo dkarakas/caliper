@@ -28,7 +28,7 @@ if len(sys.argv) < 3:
 start = sys.argv[1]
 rounds = sys.argv[2]
 all_config = [(d, k, o, p) for d in dist for k in keys for o in orgs for p in peers]
-print all_config
+print(all_config)
 random.shuffle(all_config)
 
 for trail in range(start, start+rounds):
