@@ -26,10 +26,10 @@ if __name__ ==  '__main__':
     with open(filename, 'r') as f:
         lines = f.readlines()
         for line in lines:
-            if line == '':
+            if line == '\n':
                 continue
             count += 1
-            args = line.split(' ')
+            args = line.strip().split(' ')
             run_exp((args[0], args[1], args[2], args[3]), args[4])
     end = time.perf_counter()
     print(str(count) + ' experiment finished in ' + str(end - start) + 's')
