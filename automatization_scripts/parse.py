@@ -50,25 +50,25 @@ def plot_results(different_configs, data_for_plotting):
     max_avg_throughput = plot_format_data(input_rate, data_for_plotting, different_configs, 3)
 
     plt.ylim(0, max_avg_throughput)
-    plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
+    # plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
     plt.xticks(np.arange(min(input_rate), max(input_rate), step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Throughput")
     plt.xlabel("Input Rate")
-    plt.savefig("average_throughput.png")
+    plt.savefig("average_throughput.png", bbox_inches="tight")
 
     plt.clf()
     # Average Latency
     max_avg_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 2)
     plt.ylim(0, max_avg_latency)
-    plt.yticks(np.arange(0, max_avg_latency))
+    # plt.yticks(np.arange(0, max_avg_latency))
     plt.xticks(np.arange(min(input_rate), max(input_rate), step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Latency")
     plt.xlabel("Input Rate")
-    plt.savefig("average_ltanecy.png")
+    plt.savefig("average_latency.png", bbox_inches="tight")
 
     plt.clf()
     # Maximum Latency
@@ -80,14 +80,15 @@ def plot_results(different_configs, data_for_plotting):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Maximum Latency")
     plt.xlabel("Input Rate")
-    plt.savefig("max_latency.png")
+    plt.savefig("max_latency.png", bbox_inches="tight")
 
 
 def plot_format_data(input_rate, data_to_plot, configs_to_plot, typeOfPlot):
     # typeOfPlot should be 1 - for max_latency , 2 - for avg_latency, 3 - for avg_throughput
+    max_data = 0
     for i in range(0, len(configs_to_plot)):
         single_data = [data[typeOfPlot] for data in data_to_plot[i][:]]
-        max_data = max(single_data)
+        max_data = [data[typeOfPlot] for data in data_to_plot[i][:]].append(max_data)
         if i == 0:
             plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='o', color='C0')
         elif i == 1:
@@ -128,7 +129,7 @@ def generate_final_data(data_within_config):
         new_data[i][2] = round(new_data[i][2] / num_trails, 1)
         new_data[i][3] = round(new_data[i][3] / num_trails, 1)
 
-    return new_data
+    return new_data[:16]
 
 
 def parse_file_same_config(list_of_files):
