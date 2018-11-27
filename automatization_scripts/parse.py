@@ -165,10 +165,10 @@ if __name__ == "__main__":
     data_to_plot = []
     plot_labels = []
     if sys.argv[1] == "dist":
-        types_of_dist = ["fix", "pois"]
+        types_of_dist = ["fixed", "poisson"]
         dist_configs = ["k1o2p1", "k3o2p1", "k5o2p1"]  # here we will specify all the configurations we will try
     else:
-        types_of_dist = ["fix", "pois"]
+        types_of_dist = ["fixed", "poisson"]
         dist_configs = ["k1o2p1", "k1o2p2", "k1o2p3"]  # here we will specify all the configurations we will try
 
     for type_dist in types_of_dist:
