@@ -33,9 +33,9 @@ all_config = [(d, k, o, p) for d in dist for k in keys for o in orgs for p in pe
 #print(all_config)
 random.shuffle(all_config)
 
-t_start = time.process_time()
+t_start = time.perf_counter()
 for trail in range(start, start+rounds):
     for i in range(len(all_config)):
         run_exp(all_config[i], trail)
-t_end = time.process_time()
+t_end = time.perf_counter()
 print(str(len(all_config) * rounds) + ' experiments finished in ' + str(t_end - t_start) + 's')
