@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import re
 import matplotlib.pyplot as plt
-import np
+import numpy as np
 import glob, os
 import sys
 
