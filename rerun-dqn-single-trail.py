@@ -24,7 +24,7 @@ if __name__ ==  '__main__':
     start = time.perf_counter()
     count = 0
     with open(filename, 'r') as f:
-        lines = f.readlines[]
+        lines = f.readlines()
         for line in lines:
             if line == '':
                 continue
