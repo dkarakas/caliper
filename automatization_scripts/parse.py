@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import glob, os
 import sys
-
+import scipy.stats
 
 def extract_test(text_line):
     re_object = re.match(r".*(----test round [0-9]----).*|.*(###### testing '.*' ######).*", text_line)
@@ -51,11 +51,11 @@ def plot_results(different_configs, data_for_plotting):
 
     plt.ylim(0, max_avg_throughput)
     # plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
-    plt.xticks(np.arange(100, max(input_rate), step=100))
+    plt.xticks(np.arange(100, 900, step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Throughput(tps)")
-    plt.xlabel("Input Rate")
+    plt.xlabel("Input Rate(tps)")
     plt.savefig("average_throughput.png", bbox_inches="tight")
 
     plt.clf()
@@ -63,10 +63,10 @@ def plot_results(different_configs, data_for_plotting):
     max_avg_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 2)
     plt.ylim(0, max_avg_latency)
     # plt.yticks(np.arange(0, max_avg_latency))
-    plt.xticks(np.arange(100, max(input_rate), step=100))
+    plt.xticks(np.arange(100, 900, step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.ylabel("Average Latency(s)")
+    plt.ylabel("Average Latency(tps)")
     plt.xlabel("Input Rate")
     plt.savefig("average_latency.png", bbox_inches="tight")
 
@@ -75,10 +75,10 @@ def plot_results(different_configs, data_for_plotting):
     max_max_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 1)
     plt.ylim(0, max_max_latency)
     # plt.yticks(np.arange(0, max_max_latency))
-    plt.xticks(np.arange(100, max(input_rate), step=100))
+    plt.xticks(np.arange(100, 900, step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.ylabel("Maximum Latency(s)")
+    plt.ylabel("Maximum Latency(tps)")
     plt.xlabel("Input Rate")
     plt.savefig("max_latency.png", bbox_inches="tight")
 
@@ -119,17 +119,39 @@ def generate_final_data(data_within_config):
 
     for data_within_file in data_within_config[1:]:
         for i in range(len(new_data)):
-            new_data[i][0] = (i + 1) * 50
             new_data[i][1] += data_within_file[i][1]
             new_data[i][2] += data_within_file[i][2]
             new_data[i][3] += data_within_file[i][3]
 
+    # seperate_data(data_within_config)
+
     for i in range(0, len(new_data)):
+        new_data[i][0] = (i + 1) * 50
         new_data[i][1] = round(new_data[i][1] / num_trails, 1)
         new_data[i][2] = round(new_data[i][2] / num_trails, 1)
         new_data[i][3] = round(new_data[i][3] / num_trails, 1)
 
+    # print(new_data)
     return new_data[:16]
+
+
+def seperate_data(data_within_config):
+    confidece_max_latency = []
+    for data_within_file_trail in data_within_config:
+        confidece_max_latency.append(data_within_file_trail[0][1])
+    max_latencies = [data_within_file_trail[0][1] for data_within_file_trail in data_within_config]
+    min_latencies = [data_within_file_trail[0][2] for data_within_file_trail in data_within_config]
+    avg_throughput = [data_within_file_trail[0][3] for data_within_file_trail in data_within_config]
+    # get_confidence(max_latencies)
+
+
+def get_confidence(data):
+    print(data)
+    a = 1.0 * np.array(data)
+    n = len(a)
+    m, se = np.mean(a), scipy.stats.sem(a)
+    h = se * scipy.stats.t.ppf((1 + 0.95) / 2., n-1)
+    print(h)
 
 
 def parse_file_same_config(list_of_files):
@@ -174,12 +196,21 @@ if __name__ == "__main__":
         types_of_dist = ["fixed", "poisson"]
         dist_configs = ["k1o2p1", "k1o2p2", "k1o2p3"]  # here we will specify all the configurations we will try
 
+    if os.path.isfile("datapoint.txt"):
+        os.remove("datapoint.txt")
+
     for type_dist in types_of_dist:
         for config in dist_configs:
             config_files = []
             for trail in range(int(sys.argv[2])):
                 config_files.append(type_dist + delimiter + config + delimiter + specify_trail + str(trail + 1) + file_extension)
             data_to_plot.append(parse_file_same_config(config_files))  # averaging across different trails
+
+            with open("datapoint" + "_" + sys.argv[1] + ".txt", 'a+') as outputFile:
+                file_to_process = outputFile.writelines("transaction rate, max_latency, avg_latency, avg_throughput\n")
+                for x in parse_file_same_config(config_files):
+                    outputFile.writelines(type_dist + "-" + config + " ")
+                    outputFile.writelines(str(x)+"\n")
             plot_labels.append(type_dist + "-" + config)
     # print(data_to_plot)
     plot_results(plot_labels, data_to_plot)
