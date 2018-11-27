@@ -69,8 +69,8 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.xticks(np.arange(100, 900, step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.ylabel("Average Latency(tps)")
-    plt.xlabel("Input Rate")
+    plt.ylabel("Average Latency(s)")
+    plt.xlabel("Input Rate(tps)")
     plt.savefig("average_latency.png", bbox_inches="tight")
 
     plt.clf()
@@ -81,8 +81,8 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.xticks(np.arange(100, 900, step=100))
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.ylabel("Maximum Latency(tps)")
-    plt.xlabel("Input Rate")
+    plt.ylabel("Maximum Latency(s)")
+    plt.xlabel("Input Rate(tps)")
     plt.savefig("max_latency.png", bbox_inches="tight")
 
 
