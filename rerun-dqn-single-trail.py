@@ -15,17 +15,21 @@ def run_exp(arg_tuple, trail):
     err_file = '/'.join([res_folder, err_file])
     subprocess.call([bash_script, conf_file, out_file, err_file])
 
-if len(sys.argv) != 6:
-    print('This script needs 5 arguments!')
+if len(sys.argv) != 2:
+    print('This script needs 1 argument!')
     sys.exit(1)
 
 if __name__ ==  '__main__':
-    dist = sys.argv[1]
-    key = int(sys.argv[2])
-    org = int(sys.argv[3])
-    peer = int(sys.argv[4])
-    trail = int(sys.argv[5])
+    filename = sys.argv[1]
     start = time.perf_counter()
-    run_exp((dist, key, org, peer), trail)
+    count = 0
+    with open(filename, 'r') as f:
+        lines = f.readlines[]
+        for line in lines:
+            if line == '':
+                continue
+            count += 1
+            args = line.split(' ')
+            run_exp((args[0], args[1], args[2], args[3]), args[4])
     end = time.perf_counter()
-    print('1 experiment finished in ' + str(end - start) + 's')
+    print(str(count) + ' experiment finished in ' + str(end - start) + 's')
