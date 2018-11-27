@@ -53,29 +53,31 @@ def plot_results(different_configs, data_for_plotting):
     plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
     plt.xticks(np.arange(min(input_rate), max(input_rate), step=100))
 
-    plt.legend(loc='lower right')
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Throughput")
     plt.xlabel("Input Rate")
     plt.savefig("average_throughput.png")
 
+    plt.clf()
     # Average Latency
     max_avg_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 2)
     plt.ylim(0, max_avg_latency)
     plt.yticks(np.arange(0, max_avg_latency))
     plt.xticks(np.arange(min(input_rate), max(input_rate), step=100))
 
-    plt.legend(loc='lower right')
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Latency")
     plt.xlabel("Input Rate")
     plt.savefig("average_ltanecy.png")
 
+    plt.clf()
     # Maximum Latency
     max_max_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 1)
     plt.ylim(0, max_max_latency)
     plt.yticks(np.arange(0, max_max_latency))
     plt.xticks(np.arange(min(input_rate), max(input_rate), step=100))
 
-    plt.legend(loc='lower right')
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Maximum Latency")
     plt.xlabel("Input Rate")
     plt.savefig("max_latency.png")
