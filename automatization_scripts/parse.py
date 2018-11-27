@@ -56,7 +56,7 @@ def plot_results(different_configs, data_for_plotting):
     plt.legend(loc='lower right')
     plt.ylabel("Average Throughput")
     plt.xlabel("Input Rate")
-    plt.save_fig("average_throughput.png")
+    plt.savefig("average_throughput.png")
 
     # Average Latency
     max_avg_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 2)
@@ -67,7 +67,7 @@ def plot_results(different_configs, data_for_plotting):
     plt.legend(loc='lower right')
     plt.ylabel("Average Latency")
     plt.xlabel("Input Rate")
-    plt.save_fig("average_ltanecy.png")
+    plt.savefig("average_ltanecy.png")
 
     # Maximum Latency
     max_max_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 1)
@@ -78,7 +78,7 @@ def plot_results(different_configs, data_for_plotting):
     plt.legend(loc='lower right')
     plt.ylabel("Maximum Latency")
     plt.xlabel("Input Rate")
-    plt.save_fig("max_latency.png")
+    plt.savefig("max_latency.png")
 
 
 def plot_format_data(input_rate, data_to_plot, configs_to_plot, typeOfPlot):
