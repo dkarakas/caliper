@@ -43,11 +43,14 @@ def extract_info(text_line):
         "avg_latency"), re_object.group("avg_througput")
 
 
-def plot_results(different_configs, data_for_plotting):
+def plot_results(different_configs, data_for_plotting_plus_confidence):
+    data_for_plotting_plus_confidence = list(map(list, list(zip(*data_for_plotting_plus_confidence))))
+    data_for_plotting = data_for_plotting_plus_confidence[0]
+    confidence_intervals = data_for_plotting_plus_confidence[1]
     input_rate = [x[0] for x in data_for_plotting[0]]  # input rate
 
     # Average throughput stuff
-    max_avg_throughput = plot_format_data(input_rate, data_for_plotting, different_configs, 3)
+    max_avg_throughput = plot_format_data(input_rate, data_for_plotting, different_configs, confidence_intervals, 3)
 
     plt.ylim(0, max_avg_throughput)
     # plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
@@ -60,7 +63,7 @@ def plot_results(different_configs, data_for_plotting):
 
     plt.clf()
     # Average Latency
-    max_avg_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 2)
+    max_avg_latency = plot_format_data(input_rate, data_for_plotting, different_configs,confidence_intervals, 2)
     plt.ylim(0, max_avg_latency)
     # plt.yticks(np.arange(0, max_avg_latency))
     plt.xticks(np.arange(100, 900, step=100))
@@ -72,7 +75,7 @@ def plot_results(different_configs, data_for_plotting):
 
     plt.clf()
     # Maximum Latency
-    max_max_latency = plot_format_data(input_rate, data_for_plotting, different_configs, 1)
+    max_max_latency = plot_format_data(input_rate, data_for_plotting, different_configs, confidence_intervals, 1)
     plt.ylim(0, max_max_latency)
     # plt.yticks(np.arange(0, max_max_latency))
     plt.xticks(np.arange(100, 900, step=100))
@@ -83,25 +86,27 @@ def plot_results(different_configs, data_for_plotting):
     plt.savefig("max_latency.png", bbox_inches="tight")
 
 
-def plot_format_data(input_rate, data_to_plot, configs_to_plot, typeOfPlot):
+def plot_format_data(input_rate, data_to_plot, configs_to_plot, confidence_intervals, typeOfPlot):
     # typeOfPlot should be 1 - for max_latency , 2 - for avg_latency, 3 - for avg_throughput
     max_data = 0
     for i in range(0, len(configs_to_plot)):
         single_data = [data[typeOfPlot] for data in data_to_plot[i][:]]
+        # print(confidence_intervals[0])
+        confidence_coefficient = [data[typeOfPlot - 1] for data in confidence_intervals[i][:]]
         max_data = [data[typeOfPlot] for data in data_to_plot[i][:]].append(max_data)
         if i == 0:
-            plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='o', color='C0')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='o', color='C0')
         elif i == 1:
-            plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='+', color='C0')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C0')
         elif i == 2:
-            plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='*', color='C0')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C0')
         elif i == 3:
-            plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='+', color='C1')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C1')
         elif i == 4:
-            plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='*', color='C1')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C1')
         elif i == 5:
-            plt.plot(input_rate, single_data, label=configs_to_plot[i], marker='+', color='C1')
-    return  max_data
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C1')
+    return max_data
 
 
 def conv_to_float(tuple_of_data):
@@ -134,7 +139,7 @@ def generate_final_data(data_within_config):
 
 def get_confidence_data(data_of_config):
     transposed_data_config = list(map(list, list(zip(*data_of_config))))
-    print(seperate_data(transposed_data_config))
+    return seperate_data(transposed_data_config)
 
 
 def seperate_data(data_within_config):
@@ -153,7 +158,7 @@ def get_confidence(data):#returns confidence interval
     n = len(a)
     m, se = np.mean(a), scipy.stats.sem(a)
     h = se * scipy.stats.t.ppf((1 + 0.95) / 2., n-1)
-    return h
+    return float(h)
 
 
 def parse_file_same_config(list_of_files):
@@ -173,8 +178,7 @@ def parse_file_same_config(list_of_files):
                 entry_of_file = conv_to_float(entry_of_file)  # converting to floats
                 data_config_spec_trail.append(entry_of_file)
         data_of_config.append(data_config_spec_trail)  # list containing each file's data and list of the actual data
-    get_confidence_data(data_of_config)
-    return generate_final_data(data_of_config)
+    return [generate_final_data(data_of_config), get_confidence_data(data_of_config)]
 
 
 if __name__ == "__main__":
@@ -198,8 +202,8 @@ if __name__ == "__main__":
         types_of_dist = ["fixed", "poisson"]
         dist_configs = ["k1o2p1", "k1o2p2", "k1o2p3"]  # here we will specify all the configurations we will try
 
-    if os.path.isfile("datapoint.txt"):
-        os.remove("datapoint.txt")
+    if os.path.isfile("datapoints" + "_" + sys.argv[1] + ".txt"):
+        os.remove("datapoints" + "_" + sys.argv[1] + ".txt")
 
     for type_dist in types_of_dist:
         for config in dist_configs:
@@ -207,11 +211,12 @@ if __name__ == "__main__":
             for trail in range(int(sys.argv[2])):
                 config_files.append(type_dist + delimiter + config + delimiter + specify_trail + str(trail + 1) + file_extension)
             data_to_plot.append(parse_file_same_config(config_files))  # averaging across different trails
-            # with open("datapoint" + "_" + sys.argv[1] + ".txt", 'a+') as outputFile:
-            #     file_to_process = outputFile.writelines("transaction rate, max_latency, avg_latency, avg_throughput\n")
-            #     for x in parse_file_same_config(config_files):
-            #         outputFile.writelines(type_dist + "-" + config + " ")
-            #         outputFile.writelines(str(x)+"\n")
+            with open("datapoints" + "_" + sys.argv[1] + ".txt", 'a+') as outputFile:
+                file_to_process = outputFile.writelines("transaction rate, max_latency, avg_latency, avg_throughput\n")
+                data_plotted, confidence = parse_file_same_config(config_files)
+                # print(parse_file_same_config(config_files))
+                for x in data_plotted:
+                    outputFile.writelines(type_dist + "-" + config + " ")
+                    outputFile.writelines(str(x)+"\n")
             plot_labels.append(type_dist + "-" + config)
-    # print(data_to_plot)
     plot_results(plot_labels, data_to_plot)
