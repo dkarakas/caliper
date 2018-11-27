@@ -123,35 +123,37 @@ def generate_final_data(data_within_config):
             new_data[i][2] += data_within_file[i][2]
             new_data[i][3] += data_within_file[i][3]
 
-    # seperate_data(data_within_config)
-
     for i in range(0, len(new_data)):
         new_data[i][0] = (i + 1) * 50
         new_data[i][1] = round(new_data[i][1] / num_trails, 1)
         new_data[i][2] = round(new_data[i][2] / num_trails, 1)
         new_data[i][3] = round(new_data[i][3] / num_trails, 1)
 
-    # print(new_data)
     return new_data[:16]
 
 
+def get_confidence_data(data_of_config):
+    transposed_data_config = list(map(list, list(zip(*data_of_config))))
+    print(seperate_data(transposed_data_config))
+
+
 def seperate_data(data_within_config):
-    confidece_max_latency = []
-    for data_within_file_trail in data_within_config:
-        confidece_max_latency.append(data_within_file_trail[0][1])
-    max_latencies = [data_within_file_trail[0][1] for data_within_file_trail in data_within_config]
-    min_latencies = [data_within_file_trail[0][2] for data_within_file_trail in data_within_config]
-    avg_throughput = [data_within_file_trail[0][3] for data_within_file_trail in data_within_config]
-    # get_confidence(max_latencies)
+    confidences_data_points = []
+    for data_point in data_within_config:
+        max_latencies = [specific_trail[1] for specific_trail in data_point]
+        avg_latencies = [specific_trail[2] for specific_trail in data_point]
+        avg_throughput = [specific_trail[2] for specific_trail in data_point]
+        confidences_data_points.append([get_confidence(max_latencies), get_confidence(avg_latencies), get_confidence(avg_throughput)])
+    return confidences_data_points
 
 
-def get_confidence(data):
-    print(data)
+def get_confidence(data):#returns confidence interval
+    # print(data)
     a = 1.0 * np.array(data)
     n = len(a)
     m, se = np.mean(a), scipy.stats.sem(a)
     h = se * scipy.stats.t.ppf((1 + 0.95) / 2., n-1)
-    print(h)
+    return h
 
 
 def parse_file_same_config(list_of_files):
@@ -171,7 +173,7 @@ def parse_file_same_config(list_of_files):
                 entry_of_file = conv_to_float(entry_of_file)  # converting to floats
                 data_config_spec_trail.append(entry_of_file)
         data_of_config.append(data_config_spec_trail)  # list containing each file's data and list of the actual data
-
+    get_confidence_data(data_of_config)
     return generate_final_data(data_of_config)
 
 
@@ -205,12 +207,11 @@ if __name__ == "__main__":
             for trail in range(int(sys.argv[2])):
                 config_files.append(type_dist + delimiter + config + delimiter + specify_trail + str(trail + 1) + file_extension)
             data_to_plot.append(parse_file_same_config(config_files))  # averaging across different trails
-
-            with open("datapoint" + "_" + sys.argv[1] + ".txt", 'a+') as outputFile:
-                file_to_process = outputFile.writelines("transaction rate, max_latency, avg_latency, avg_throughput\n")
-                for x in parse_file_same_config(config_files):
-                    outputFile.writelines(type_dist + "-" + config + " ")
-                    outputFile.writelines(str(x)+"\n")
+            # with open("datapoint" + "_" + sys.argv[1] + ".txt", 'a+') as outputFile:
+            #     file_to_process = outputFile.writelines("transaction rate, max_latency, avg_latency, avg_throughput\n")
+            #     for x in parse_file_same_config(config_files):
+            #         outputFile.writelines(type_dist + "-" + config + " ")
+            #         outputFile.writelines(str(x)+"\n")
             plot_labels.append(type_dist + "-" + config)
     # print(data_to_plot)
     plot_results(plot_labels, data_to_plot)
