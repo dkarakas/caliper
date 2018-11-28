@@ -147,7 +147,7 @@ def seperate_data(data_within_config):
     for data_point in data_within_config:
         max_latencies = [specific_trail[1] for specific_trail in data_point]
         avg_latencies = [specific_trail[2] for specific_trail in data_point]
-        avg_throughput = [specific_trail[2] for specific_trail in data_point]
+        avg_throughput = [specific_trail[3] for specific_trail in data_point]
         confidences_data_points.append([get_confidence(max_latencies), get_confidence(avg_latencies), get_confidence(avg_throughput)])
     return confidences_data_points
 
