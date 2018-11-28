@@ -59,7 +59,7 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Throughput(tps)")
     plt.xlabel("Input Rate(tps)")
-    plt.savefig("average_throughput.png", bbox_inches="tight")
+    plt.savefig("average_throughput.png", bbox_inches="tight", format='png', dpi=500)
 
     plt.clf()
     # Average Latency
@@ -71,7 +71,7 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Latency(s)")
     plt.xlabel("Input Rate(tps)")
-    plt.savefig("average_latency.png", bbox_inches="tight")
+    plt.savefig("average_latency.png", bbox_inches="tight", format='png', dpi=500)
 
     plt.clf()
     # Maximum Latency
@@ -83,7 +83,7 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Maximum Latency(s)")
     plt.xlabel("Input Rate(tps)")
-    plt.savefig("max_latency.png", bbox_inches="tight")
+    plt.savefig("max_latency.png", bbox_inches="tight", format='png', dpi=500)
 
 
 def plot_format_data(input_rate, data_to_plot, configs_to_plot, confidence_intervals, typeOfPlot):
@@ -97,15 +97,15 @@ def plot_format_data(input_rate, data_to_plot, configs_to_plot, confidence_inter
         if i == 0:
             plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='o', color='C0')
         elif i == 1:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C0')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C0', markersize='10')
         elif i == 2:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C0')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C0', markersize='10')
         elif i == 3:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C1')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='x', color='C1')
         elif i == 4:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C1')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='s', color='C1', markersize='5')
         elif i == 5:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C1')
+            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='d', color='C1', markersize='5')
     return max_data
 
 
