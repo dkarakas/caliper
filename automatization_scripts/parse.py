@@ -1,10 +1,10 @@
-#!/usr/bin/env python
 import re
 import matplotlib.pyplot as plt
 import numpy as np
 import glob, os
 import sys
 import scipy.stats
+
 
 def extract_test(text_line):
     re_object = re.match(r".*(----test round [0-9]----).*|.*(###### testing '.*' ######).*", text_line)
@@ -40,7 +40,7 @@ def extract_info(text_line):
         return None
 
     return re_object.group("send_rate"), re_object.group("max_latency"), re_object.group(
-        "avg_latency"), re_object.group("avg_througput")
+        "avg_latency"), re_object.group("avg_througput"), re_object.group("fail")
 
 
 def plot_results(different_configs, data_for_plotting_plus_confidence):
@@ -49,9 +49,20 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     confidence_intervals = data_for_plotting_plus_confidence[1]
     input_rate = [x[0] for x in data_for_plotting[0]]  # input rate
 
+    # Average fail stuff
+    fail_max = plot_format_data(input_rate, data_for_plotting, different_configs, confidence_intervals, 4)
+    plt.ylim(0, fail_max)
+    # plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
+    plt.xticks(np.arange(100, 900, step=100))
+
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.ylabel("Fail rate")
+    plt.xlabel("Input Rate(tps)")
+    plt.savefig("a_fail.png", bbox_inches="tight", format='png', dpi=250)
+    plt.clf()
+
     # Average throughput stuff
     max_avg_throughput = plot_format_data(input_rate, data_for_plotting, different_configs, confidence_intervals, 3)
-
     plt.ylim(0, max_avg_throughput)
     # plt.yticks(np.arange(0, max_avg_throughput + 5, step=100))
     plt.xticks(np.arange(100, 900, step=100))
@@ -59,7 +70,7 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Throughput(tps)")
     plt.xlabel("Input Rate(tps)")
-    plt.savefig("average_throughput.png", bbox_inches="tight", format='png', dpi=500)
+    plt.savefig("average_throughput.png", bbox_inches="tight", format='png', dpi=250)
 
     plt.clf()
     # Average Latency
@@ -71,7 +82,7 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Average Latency(s)")
     plt.xlabel("Input Rate(tps)")
-    plt.savefig("average_latency.png", bbox_inches="tight", format='png', dpi=500)
+    plt.savefig("average_latency.png", bbox_inches="tight", format='png', dpi=250)
 
     plt.clf()
     # Maximum Latency
@@ -83,7 +94,7 @@ def plot_results(different_configs, data_for_plotting_plus_confidence):
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.ylabel("Maximum Latency(s)")
     plt.xlabel("Input Rate(tps)")
-    plt.savefig("max_latency.png", bbox_inches="tight", format='png', dpi=500)
+    plt.savefig("max_latency.png", bbox_inches="tight", format='png', dpi=250)
 
 
 def plot_format_data(input_rate, data_to_plot, configs_to_plot, confidence_intervals, typeOfPlot):
@@ -93,19 +104,22 @@ def plot_format_data(input_rate, data_to_plot, configs_to_plot, confidence_inter
         single_data = [data[typeOfPlot] for data in data_to_plot[i][:]]
         # print(confidence_intervals[0])
         confidence_coefficient = [data[typeOfPlot - 1] for data in confidence_intervals[i][:]]
-        max_data = [data[typeOfPlot] for data in data_to_plot[i][:]].append(max_data)
+        max_data = max([max([data[typeOfPlot] for data in data_to_plot[i][:]]), max_data])
         if i == 0:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='o', color='C0')
+            (_, caps, _) = plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='o', color='C0', capsize=4)
         elif i == 1:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C0', markersize='10')
+            (_, caps, _) = plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='+', color='C0', markersize='10', capsize=4)
         elif i == 2:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C0', markersize='10')
+            (_, caps, _) = plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='*', color='C0', markersize='10', capsize=4)
         elif i == 3:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='x', color='C1')
+            (_, caps, _) = plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='x', color='C1', capsize=4)
         elif i == 4:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='s', color='C1', markersize='5')
+            (_, caps, _) = plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='s', color='C1', markersize='5', capsize=4)
         elif i == 5:
-            plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='d', color='C1', markersize='5')
+            (_, caps, _) = plt.errorbar(input_rate, single_data, label=configs_to_plot[i], yerr=confidence_coefficient[:16], marker='d', color='C1', markersize='5', capsize=4)
+        if typeOfPlot != 4:# remove confidence bars for fail rate
+            for cap in caps:
+                cap.set_markeredgewidth(1)
     return max_data
 
 
@@ -114,7 +128,8 @@ def conv_to_float(tuple_of_data):
     max_latency = float(tuple_of_data[1])
     avg_latency = float(tuple_of_data[2])
     avg_throughput = float(tuple_of_data[3])
-    return input_rate, max_latency, avg_latency, avg_throughput
+    fail = float(tuple_of_data[4])
+    return input_rate, max_latency, avg_latency, avg_throughput, fail
 
 
 def generate_final_data(data_within_config):
@@ -127,12 +142,14 @@ def generate_final_data(data_within_config):
             new_data[i][1] += data_within_file[i][1]
             new_data[i][2] += data_within_file[i][2]
             new_data[i][3] += data_within_file[i][3]
+            new_data[i][4] += data_within_file[i][4]
 
     for i in range(0, len(new_data)):
         new_data[i][0] = (i + 1) * 50
         new_data[i][1] = round(new_data[i][1] / num_trails, 1)
         new_data[i][2] = round(new_data[i][2] / num_trails, 1)
         new_data[i][3] = round(new_data[i][3] / num_trails, 1)
+        new_data[i][4] = round(new_data[i][4] / num_trails, 1)
 
     return new_data[:16]
 
@@ -148,12 +165,11 @@ def seperate_data(data_within_config):
         max_latencies = [specific_trail[1] for specific_trail in data_point]
         avg_latencies = [specific_trail[2] for specific_trail in data_point]
         avg_throughput = [specific_trail[3] for specific_trail in data_point]
-        confidences_data_points.append([get_confidence(max_latencies), get_confidence(avg_latencies), get_confidence(avg_throughput)])
+        confidences_data_points.append([get_confidence(max_latencies), get_confidence(avg_latencies), get_confidence(avg_throughput), 0])
     return confidences_data_points
 
 
 def get_confidence(data):#returns confidence interval
-    # print(data)
     a = 1.0 * np.array(data)
     n = len(a)
     m, se = np.mean(a), scipy.stats.sem(a)
